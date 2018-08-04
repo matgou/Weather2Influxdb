@@ -26,6 +26,7 @@ do
     echo " wind_speed: $wind_speed"
     echo " wind_direction: $wind_direction"
     echo " pressure: $pressure"
+    echo " rain_3h: $rain_3h"
     echo ""
 
     curl -k -i -XPOST "$INFLUX_URL/write?db=$INFLUX_DATABASE&u=$INFLUX_USER&p=$INFLUX_PASSWORD" --data-binary "weather,station=$city temperature_K=$temp,humidity=$humidity,temp_min=$temp_min,temp_max=$temp_max,wind_speed=$wind_speed,wind_direction=$wind_direction,pressure=$pressure,rain_3h=$rain_3h"
