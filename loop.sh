@@ -12,6 +12,11 @@ do
     temp_max=$( cat $tmp | jq .main.temp_max ) 
     wind_speed=$( cat $tmp | jq .wind.speed )
     wind_direction=$( cat $tmp | jq .wind.deg )
+    rain_3h=$( cat $tmp | jq   '."rain"."3h"' )
+    if [ "$rain_3h" == "null" ]
+    then
+	  rain_3h=0
+    fi
     echo "********************************************************************"
     echo " Ville : $city"
     echo " temperature: $temp"
@@ -23,7 +28,7 @@ do
     echo " pressure: $pressure"
     echo ""
 
-    curl -k -i -XPOST "$INFLUX_URL/write?db=$INFLUX_DATABASE&u=$INFLUX_USER&p=$INFLUX_PASSWORD" --data-binary "weather,station=$city temperature_K=$temp,humidity=$humidity,temp_min=$temp_min,temp_max=$temp_max,wind_speed=$wind_speed,wind_direction=$wind_direction,pressure=$pressure"
+    curl -k -i -XPOST "$INFLUX_URL/write?db=$INFLUX_DATABASE&u=$INFLUX_USER&p=$INFLUX_PASSWORD" --data-binary "weather,station=$city temperature_K=$temp,humidity=$humidity,temp_min=$temp_min,temp_max=$temp_max,wind_speed=$wind_speed,wind_direction=$wind_direction,pressure=$pressure,rain_3h=$rain_3h"
 
     
     sleep 60
