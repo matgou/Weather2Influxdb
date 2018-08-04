@@ -18,7 +18,7 @@ do
     echo " temp_max: $temp_max"
     echo ""
 
-    curl -k -i -XPOST "$INFLUX_URL/write?db=$INFLUX_DATABASE&u=$INFLUX_USER&p=$INFLUX_PASSWORD" --data-binary "weather,station=$city temperature_K=$temp,humidity=$humidity,temp_min=$temp_min,temp_max=$temp_max"
+    curl -k -i -XPOST "$INFLUX_URL/write?db=$INFLUX_DATABASE&u=$INFLUX_USER&p=$INFLUX_PASSWORD" --data-binary "weather,station=$city temperature_K=$temp,humidity=$humidity,temp_min=$temp_min,temp_max=$temp_max,pressure=$pressure"
 
     
     sleep 60
