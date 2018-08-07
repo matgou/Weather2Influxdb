@@ -17,6 +17,10 @@ do
     then
 	  rain_3h=0
     fi
+    if [ "$wind_direction" == "null" ]
+    then
+	  wind_direction=0
+    fi
     echo "********************************************************************"
     echo " Ville : $city"
     echo " temperature: $temp"
